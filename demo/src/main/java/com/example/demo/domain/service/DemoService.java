@@ -5,6 +5,7 @@ import com.example.demo.domain.exception.SystemException;
 import com.example.demo.domain.object.CacheKey;
 import com.example.demo.domain.object.Post;
 import com.example.demo.domain.object.User;
+import com.example.demo.domain.object.UserRole;
 import com.example.demo.domain.repository.RdsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -49,21 +50,24 @@ public class DemoService {
     public void crud() {
         // User1 has already created.
 
-        int rowsAffected_create = rds.create(new User(2, "user2", LocalDate.parse("0002-02-02")));
+        int rowsAffected_create = rds.create(new User(2, "user2",
+                "pass2", LocalDate.parse("0002-02-02"), UserRole.USER));
         log.info(Integer.toString(rowsAffected_create));    // 1
 
         Optional<User> user = rds.read(1);
         log.info(user.toString());
-        // Optional[User(id=1, name=user1, birthday=0001-01-01)]
+        // Optional[User(userid=1, username=user1, password=pass1, birthday=0001-01-01, role=ADMIN)]
 
         List<User> demoUsers = rds.readAll();
         log.info(demoUsers.toString());
-        // [User(id=1, name=user1, birthday=0001-01-01), User(id=2, name=user2, birthday=0002-02-02)]
+        // [User(userid=1, username=user1, password=pass1, birthday=0001-01-01, role=ADMIN),
+        //  User(userid=2, username=user2, password=pass2, birthday=0002-02-02, role=USER)]
 
-        int rowsAffected_update = rds.update(new User(1, "user3", LocalDate.parse("0003-03-03")));
+        int rowsAffected_update = rds.update(new User(2, "user3",
+                "pass3", LocalDate.parse("0003-03-03"), UserRole.USER));
         log.info(Integer.toString(rowsAffected_update));   // 1
 
-        int rowAffected_delete = rds.delete(1);
+        int rowAffected_delete = rds.delete(2);
         log.info(Integer.toString(rowAffected_delete));   // 1
     }
 

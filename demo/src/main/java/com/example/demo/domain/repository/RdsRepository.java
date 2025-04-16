@@ -16,4 +16,7 @@ public interface RdsRepository {
     int update(User User);
 
     int delete(int userid);
+
+    // For Security
+    Optional<User> read(String username);
 }

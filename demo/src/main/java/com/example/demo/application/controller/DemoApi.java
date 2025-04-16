@@ -98,5 +98,4 @@ public class DemoApi {
         headers.setContentType(MediaType.APPLICATION_JSON);
         return new ResponseEntity<>(restRes, headers, HttpStatus.OK);
     }
-
 }

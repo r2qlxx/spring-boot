@@ -1,6 +1,7 @@
 package com.example.demo.domain.service;
 
 import com.example.demo.domain.object.User;
+import com.example.demo.domain.object.UserRole;
 import com.example.demo.domain.repository.RdsRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ public class DemoServiceTest {
         int expected = 1;
         when(rds.create(any(User.class))).thenReturn(1);
 
-        int actual = demoService.createNewUser(new User(1, "user1", LocalDate.parse("0001-01-01")));
+        int actual = demoService.createNewUser(new User(1, "user1", "pass1", LocalDate.parse("0001-01-01"), UserRole.USER));
 
         assertEquals(expected, actual);
     }
@@ -38,7 +39,7 @@ public class DemoServiceTest {
     // Spy, Verify
     @Test
     void emailUserInfo_exist_user() {
-        when(demoService.readUser(any(Integer.class))).thenReturn(Optional.of(new User(1, "user1", LocalDate.parse("0001-01-01"))));
+        when(demoService.readUser(any(Integer.class))).thenReturn(Optional.of(new User(1, "user1", "pass1", LocalDate.parse("0001-01-01"), UserRole.USER)));
 
         demoService.emailUserInfo(1);
 
