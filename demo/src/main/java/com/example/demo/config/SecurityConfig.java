@@ -55,7 +55,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/admin/**", "/demo/**", "/h2-console/**").hasRole(UserRole.ADMIN.name())
+                        .requestMatchers("/admin/**", "/demo/**", "/h2-console/**", "/actuator/**").hasRole(UserRole.ADMIN.name())
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())   // Allow Basic Auth
