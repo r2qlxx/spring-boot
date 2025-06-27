@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Demo MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link th:href="@{/css/index.css}" rel="stylesheet">
+</head>
+<body>
+    <!-- Basic text -->
+    <p th:text="${message}"></p>
+    <p th:text="${message} + ' World!'"></p>
+    <p th:text="|${message} World!|"></p>
+
+    <!-- Object access -->
+    <p th:text="${user.userid}"></p>
+    <div th:object="${user}">
+        <p th:text="*{userid}"></p>
+        <p th:text="*{username}"></p>
+    </div>
+
+    <!-- Local variables -->
+    <div th:with="id=1,name=${user.username}">
+        <p th:text="|id: ${id}, name: ${name}|"></p>
+    </div>
+
+    <!-- Calculation -->
+    <p th:text="1 + 1"></p>
+    <p th:text="1 - 1"></p>
+    <p th:text="1 * 1"></p>
+    <p th:text="1 / 1"></p>
+    <p th:text="1 % 1"></p>
+
+    <!-- If -->
+    <div th:if="${user.userid} eq 1">
+    </div>
+    <div th:if="${user.userid} ne 1">
+    </div>
+    <div th:if="${user.userid} lt 1">
+    </div>
+    <div th:if="${user.userid} le 1">
+    </div>
+    <div th:if="${user.userid} gt 1">
+    </div>
+    <div th:if="${user.userid} ge 1">
+    </div>
+
+    <!-- Unless -->
+    <div th:unless="${user.userid} eq 1">
+    </div>
+
+    <!-- Ternary operator -->
+    <p th:text="True ? 'True-Val' : 'False-Val'"></p>
+
+    <!-- For -->
+    <div th:each="fruit, iterStat : ${fruits}">
+        <p th:text="${fruit}"></p>
+        <p th:text="|index: ${iterStat.index}|"></p>
+    </div>
+
+    <!-- Switch -->
+    <div th:switch="${user.userid}">
+        <p th:case=1>admin</p>
+        <p th:case=2>user</p>
+        <p th:case="*">others</p>
+    </div>
+
+    <!-- Read value from messages.properties -->
+    <p th:text="#{greeting(${user.username})}"></p>
+
+    <!-- CSS -->
+    <p class="text bold" th:text="${message}"></p>
+</body>
+</html>

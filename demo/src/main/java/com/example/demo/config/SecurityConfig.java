@@ -54,7 +54,7 @@ public class SecurityConfig {
         http.requiresChannel(channel -> channel.anyRequest().requiresSecure()) // Transfer Http to HTTPS
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/").permitAll()
+                        .requestMatchers("/", "/demo").permitAll()
                         .requestMatchers("/admin/**", "/demo/**", "/h2-console/**", "/actuator/**").hasRole(UserRole.ADMIN.name())
                         .anyRequest().authenticated()
                 )
